@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="css/main.css">
+
+
+<body>
+	<div class="game">
+		<div class="main-game">
+			<img src="img/car1.png" class="player" id="charactor1"></img>
+			<img src="img/car2.png" class="enemy" id="charactor2"></img>
+			<div class="game-over-screen">
+				<h3>Game Over</h3>
+				<h2 class="score">Score</h2>
+				<button onclick="restart()">Restart</button>
+			</div>
+			<div class="controls">
+				<div class="left">
+					<i class="fa fa-aerro-left"></i>
+				</div>
+				<div class="right">
+					<i class="fa fa-aerro-right"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	var score =0;
+	// define
+	c1 = document.getElementById('charactor1');
+	c2 = document.getElementById('charactor2')
+
+	c2.addEventListener('animationiteration', () => {
+		randomWidth = Math.floor(Math.random() * 90 + 10);
+		c2.style.left = randomWidth + '%';
+
+	});
+	// controls
+	document.addEventListener('keyup', (e) => {
+		var keycode = e.keyCode;
+		console.log(keycode);
+		if (keycode == 37) {
+			var c1Left = parseInt(window.getComputedStyle(c1).getPropertyValue("left"));
+			c1.style.left = Math.abs(c1Left - 20) + 'px';
+		}
+		if (keycode == 39) {
+			var c1Left = parseInt(window.getComputedStyle(c1).getPropertyValue("left"));
+			c1.style.left = Math.abs(c1Left + 20) + 'px';
+		}
+	});
+	document.querySelector('.left').addEventListener('click', () => {
+			var c1Left = parseInt(window.getComputedStyle(c1).getPropertyValue("left"));
+			c1.style.left = Math.abs(c1Left - 20) + 'px';
+		
+	});
+	document.querySelector('.right').addEventListener('click', () => {
+		var c1Left = parseInt(window.getComputedStyle(c1).getPropertyValue("left"));
+			c1.style.left = Math.abs(c1Left + 20) + 'px';
+	
+});
+
+
+	// check
+	
+	setInterval(() => {
+		c1top = parseInt(window.getComputedStyle(c1).getPropertyValue("top"));
+		c1left = parseInt(window.getComputedStyle(c1).getPropertyValue("left"));
+		c2top = parseInt(window.getComputedStyle(c2).getPropertyValue("top"));
+		c2left = parseInt(window.getComputedStyle(c2).getPropertyValue("left"));
+		let offsetLeft = Math.abs(c1left - c2left);
+		let offsetTop = Math.abs(c1top - c2top);
+		
+		if (offsetLeft < 48 && offsetTop < 88) {
+			$('.main-game').addClass('game-over');
+			document.querySelector("h2").innerHTML=score;
+		}
+		else{
+			score++
+		}
+		
+		
+	}, 10);
+	function restart(){
+		$('.main-game').removeClass('game-over');
+		score=0;
+	}
+</script>
+
+</html>

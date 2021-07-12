@@ -1,0 +1,173 @@
+    .game{
+        width: 100vw;
+        height: 100vh;
+        background: black;
+    }
+    .score{
+        color: white;
+    }
+    .main-game{
+    position:fixed;
+    width:300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height:560px;
+    background:#525252;
+    overflow: hidden;
+    z-index: 2;
+    border-top: 15px solid rgba(255, 255, 255,.8);
+    border-bottom: 20px solid rgba(255, 255, 255,.8);
+    border-left: 10px solid rgba(255, 255, 255,.8);
+    border-right: 10px solid rgba(255, 255, 255,.8);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    }
+    .main-game .game-over-screen{
+        display: none;
+    }
+    .main-game::after{
+        content:'';
+        position:absolute;
+        top:-10px;
+        left:50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255,.8);
+        border-radius: 50%;
+        z-index: 9;
+    }
+    .main-game::before{
+    content:'';
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translateX(-50%) rotate(90deg);
+    width:80vh;
+    height: 10px;
+    background:linear-gradient(270deg, #fff 0%, #fff 70%, #525252 70%, #525252 100% );
+    background-size:40px;
+    animation:road 0.2s linear infinite;
+    }
+    @keyframes road {
+    
+    0%{
+    background-position:0%;
+    }
+    100%{
+    background-position:+40px;
+    }
+    }
+    *{
+    margin:0;
+    padding:0;
+    }
+   
+    #charactor1 {
+    position: absolute;
+    transition:0.2s;
+    height:100px;
+    width:60px;
+    left:80px;
+    
+    bottom:20px;
+    }
+    .animate{
+    animation:jump 0.6s 1 linear;
+    }
+    #charactor2 {
+    position: absolute;
+    left: 0;
+    top:40vh;
+    animation:move 2s linear infinite;
+   
+    width:60px;
+    height:100px;
+    }
+    @keyframes move {
+        from{top:-10vh}
+        to{top:110vh}
+    }
+    #charactor3 {
+    position:fixed;
+    right:-100vw;
+    top:80vh;
+    animation:move 4s linear infinite;
+    transition:0.9s;
+    height:60px;
+    width:100px;
+    }
+    .main-game.game-over::before{
+        animation: none;
+    }
+    
+    .main-game.game-over #charactor2,.main-game.game-over #charactor1{
+        animation: none;
+        transition: 0.8s;
+    }
+    .main-game.game-over .game-over-screen{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        color: #fff;
+        background: rgba(0, 0, 0,.5);
+    }
+    .main-game.game-over .controls{
+        display: none;
+    }
+    .main-game .game-over-screen button{
+        padding: 6px 20px;
+        border-radius: 6px;
+        color: #fff;
+        border: 2px solid #fff;
+        background: transparent;
+    }
+    .score {
+    position:fixed;
+    font-weight:1000;
+    font-size:30px;
+    top:6px;
+    right:5px;
+    }
+    .controls .left, .controls .right{
+    display: none;
+    }
+    @media(max-width:500px){
+        .main-game{
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            border-radius: 0;
+        }
+        .main-game::after{
+            display: none;
+        }
+        .main-game::before{
+            width: 100vh;
+        }
+        .controls .left{
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            display: block;
+            
+        }
+        .controls .right{
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            display: block;
+           
+        }
+    }
