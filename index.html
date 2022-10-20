@@ -41,7 +41,7 @@
 
 	});
 	// controls
-	document.addEventListener('keyup', (e) => {
+	document.addEventListener('keydown', (e) => {
 		var keycode = e.keyCode;
 		console.log(keycode);
 		if (keycode == 37) {
@@ -50,17 +50,17 @@
 		}
 		if (keycode == 39) {
 			var c1Left = parseInt(window.getComputedStyle(c1).getPropertyValue("left"));
-			c1.style.left = Math.abs(c1Left + 20) + 'px';
+			c1.style.left = Math.abs(c1Left + 40) + 'px';
 		}
 	});
 	document.querySelector('.left').addEventListener('click', () => {
 			var c1Left = parseInt(window.getComputedStyle(c1).getPropertyValue("left"));
-			c1.style.left = Math.abs(c1Left - 20) + 'px';
+			c1.style.left = Math.abs(c1Left - 40) + 'px';
 		
 	});
 	document.querySelector('.right').addEventListener('click', () => {
 		var c1Left = parseInt(window.getComputedStyle(c1).getPropertyValue("left"));
-			c1.style.left = Math.abs(c1Left + 20) + 'px';
+			c1.style.left = Math.abs(c1Left + 40) + 'px';
 	
 });
 
